@@ -1,6 +1,15 @@
 on first join:
     add 1 to {logins}
     broadcast "&8[&a+&8] &7%player% has joined for the first time! &8[&a##%{logins}%&8]"
+    wipe player sidebar
+    set name of sidebar of player to  "&6&lCrazeX"
+    set score "" in sidebar of player to 6
+    set score "&8¬ &7Players&8: &f%number of all players%" in sidebar of player to 5
+    set score "" in sidebar of player to 4
+    set score "&8¬ &7EXP&8: &f%{xp1.%player%}%/30" in sidebar of player to 3
+    set score "" in sidebar of player to 2
+    set score "&8¬ &7Level&8: &f%{lv1.%player%}%" in sidebar of player to 1
+    set score "" in sidebar of player to 0
 
 variables:
 	{%player%.xp} = 0
@@ -42,13 +51,14 @@ on join:
   set gamemode of player to Adventure
   set {w.%player%} to 0
   wipe player sidebar
-  set name of sidebar of player to  "&6&lCRAZEX"
-  set score "&6&lUsername&8:" in sidebar of player to 5
-  set score "&7%player%" in sidebar of player to 4
-  set score "&6&lExperience&8:" in sidebar of player to 3
-  set score "&7%{xp1.%player%}%/30" in sidebar of player to 2
-  set score "&6&lLevel&8:" in sidebar of player to 1
-  set score "&7%{lv1.%player%}%" in sidebar of player to 0
+  set name of sidebar of player to  "&6&lCrazeX"
+  set score "" in sidebar of player to 6
+  set score "&8¬ &7Players&8: &f%number of all players%" in sidebar of player to 5
+  set score "" in sidebar of player to 4
+  set score "&8¬ &7EXP&8: &f%{xp1.%player%}%/30" in sidebar of player to 3
+  set score "" in sidebar of player to 2
+  set score "&8¬ &7Level&8: &f%{lv1.%player%}%" in sidebar of player to 1
+  set score "" in sidebar of player to 0
 
 on break of coal ore:
     if {xp1.%player%} >= 30:
@@ -59,13 +69,14 @@ on break of coal ore:
     wipe player sidebar
     cancel event
     wipe player sidebar
-    set name of sidebar of player to  "&6&lCRAZEX"
-    set score "&6&lUsername&8:" in sidebar of player to 5
-    set score "&7%player%" in sidebar of player to 4
-    set score "&6&lExperience&8:" in sidebar of player to 3
-    set score "&7%{xp1.%player%}%/30" in sidebar of player to 2
-    set score "&6&lLevel&8:" in sidebar of player to 1
-    set score "&7%{lv1.%player%}%" in sidebar of player to 0
+    set name of sidebar of player to  "&6&lCrazeX"
+    set score "" in sidebar of player to 6
+    set score "&8¬ &7Players&8: &f%number of all players%" in sidebar of player to 5
+    set score "" in sidebar of player to 4
+    set score "&8¬ &7EXP&8: &f%{xp1.%player%}%/30" in sidebar of player to 3
+    set score "" in sidebar of player to 2
+    set score "&8¬ &7Level&8: &f%{lv1.%player%}%" in sidebar of player to 1
+    set score "" in sidebar of player to 0
     add 1 to {xp1.%player%}
     add 1 to {bl1.%player%}
     give 1 coal to player
@@ -84,13 +95,14 @@ on break of iron ore:
     wipe player sidebar
     cancel event
     wipe player sidebar
-    set name of sidebar of player to  "&6&lCRAZEX"
-    set score "&6&lUsername&8:" in sidebar of player to 5
-    set score "&7%player%" in sidebar of player to 4
-    set score "&6&lExperience&8:" in sidebar of player to 3
-    set score "&7%{xp1.%player%}%/30" in sidebar of player to 2
-    set score "&6&lLevel&8:" in sidebar of player to 1
-    set score "&7%{lv1.%player%}%" in sidebar of player to 0
+    set name of sidebar of player to  "&6&lCrazeX"
+    set score "" in sidebar of player to 6
+    set score "&8¬ &7Players&8: &f%number of all players%" in sidebar of player to 5
+    set score "" in sidebar of player to 4
+    set score "&8¬ &7EXP&8: &f%{xp1.%player%}%/30" in sidebar of player to 3
+    set score "" in sidebar of player to 2
+    set score "&8¬ &7Level&8: &f%{lv1.%player%}%" in sidebar of player to 1
+    set score "" in sidebar of player to 0
     add 2 to {xp1.%player%}
     add 1 to {bl1.%player%}
     give 2 coal to player
@@ -107,13 +119,14 @@ on break of diamond ore:
     add 1 to {st}
     wipe player sidebar
     wipe player sidebar
-    set name of sidebar of player to  "&6&lCRAZEX"
-    set score "&6&lUsername&8:" in sidebar of player to 5
-    set score "&7%player%" in sidebar of player to 4
-    set score "&6&lExperience&8:" in sidebar of player to 3
-    set score "&7%{xp1.%player%}%/30" in sidebar of player to 2
-    set score "&6&lLevel&8:" in sidebar of player to 1
-    set score "&7%{lv1.%player%}%" in sidebar of player to 0
+    set name of sidebar of player to  "&6&lCrazeX"
+    set score "" in sidebar of player to 6
+    set score "&8¬ &7Players&8: &f%number of all players%" in sidebar of player to 5
+    set score "" in sidebar of player to 4
+    set score "&8¬ &7EXP&8: &f%{xp1.%player%}%/30" in sidebar of player to 3
+    set score "" in sidebar of player to 2
+    set score "&8¬ &7Level&8: &f%{lv1.%player%}%" in sidebar of player to 1
+    set score "" in sidebar of player to 0
     add 4 to {xp1.%player%}
     add 1 to {bl1.%player%}
     give 4 coal to player
@@ -130,13 +143,14 @@ on break of lapis ore:
     add 1 to {st}
     wipe player sidebar
     wipe player sidebar
-    set name of sidebar of player to  "&6&lCRAZEX"
-    set score "&6&lUsername&8:" in sidebar of player to 5
-    set score "&7%player%" in sidebar of player to 4
-    set score "&6&lExperience&8:" in sidebar of player to 3
-    set score "&7%{xp1.%player%}%/30" in sidebar of player to 2
-    set score "&6&lLevel&8:" in sidebar of player to 1
-    set score "&7%{lv1.%player%}%" in sidebar of player to 0
+    set name of sidebar of player to  "&6&lCrazeX"
+    set score "" in sidebar of player to 6
+    set score "&8¬ &7Players&8: &f%number of all players%" in sidebar of player to 5
+    set score "" in sidebar of player to 4
+    set score "&8¬ &7EXP&8: &f%{xp1.%player%}%/30" in sidebar of player to 3
+    set score "" in sidebar of player to 2
+    set score "&8¬ &7Level&8: &f%{lv1.%player%}%" in sidebar of player to 1
+    set score "" in sidebar of player to 0
     add 5 to {xp1.%player%}
     add 1 to {bl1.%player%}
     give 5 coal to player
@@ -145,6 +159,7 @@ on break of lapis ore:
     set block to lapis ore
 
 command /warn [<player>]:
+    permission: raz.warn
     usage: &c/warn <player>
     trigger:
         if {w.%player%} >= 3:
