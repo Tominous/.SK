@@ -11,6 +11,47 @@ on first join:
     set score "&8¬ &7Level&8: &f%{lv1.%player%}%" in sidebar of player to 1
     set score "" in sidebar of player to 0
 
+on join:
+    teleport player to {spawn}
+    execute console command "/minecraft:give %player% wooden_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy:[coal_ore]}"
+
+every 10 seconds:
+    loop all players:
+        wipe loop-player sidebar
+        set name of sidebar of loop-player to  "&6&lCrazeX"
+        set score "" in sidebar of loop-player to 6
+        set score "&8¬ &7Players&8: &f%number of all players%" in sidebar of loop-player to 5
+        set score "" in sidebar of loop-player to 4
+        set score "&8¬ &7EXP&8: &f%{xp::%loop-player%}%/30" in sidebar of loop-player to 3
+        set score "" in sidebar of loop-player to 2
+        set score "&8¬ &7Level&8: &f%{lv::%loop-player%}%" in sidebar of loop-player to 1
+        set score "" in sidebar of loop-player to 0
+command /setspawn:
+    permission: skript.use
+    permission message: &cNo Thank you!
+    trigger:
+        set {spawn} to player's location
+        send "&cSuccessfully set the spawn to your location!"
+command /spawn:
+    trigger:
+        send "&7[&6CRAZEX&7] &eTeleporting you to spawn in &65&e.."
+        wait 1 second
+        send "&7[&6CRAZEX&7] &eTeleporting you to spawn in &64&e.."
+        wait 1 second
+        send "&7[&6CRAZEX&7] &eTeleporting you to spawn in &63&e.."
+        wait 1 second
+        send "&7[&6CRAZEX&7] &eTeleporting you to spawn in &62&e.."
+        wait 1.5 seconds
+        send "&7[&6CRAZEX&7] &eTeleporting you to spawn in &61&e.."
+        wait 2 seconds
+        teleport player to {spawn}
+        send "&7[&6CRAZEX&7] &eTeleported you to spawn!"
+command /pickaxe:
+    trigger:
+        execute console command "/minecraft:give %player% wooden_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy:[coal_ore]}"
+        send "&e[&6CRAZEX&e]&a You have acquired the &6starter pickaxe!"
+
+
 variables:
 	{%player%.xp} = 0
 	{%player%.lv} = 0
@@ -20,9 +61,6 @@ every 10 seconds:
         heal the loop-player
         feed the loop-player
 
-on chat:
-    cancel event
-    broadcast "&8[&a%{lv1.%player%}%&8] &r%colored player's prefix%&7%player% &r%colored player's suffix%&8» &f%message%" 
 
 on command "minecraft:me":   
     cancel event
@@ -39,6 +77,36 @@ on first join:
 command /logins:
     trigger:
         send "&aWe have %{logins}% logins currently!"
+command /gma:
+    aliases: /gamemode a, /gamemodea
+    permission: skript.gaemode.a
+    permission message: &cInvaild Permission.
+    trigger:
+        send "&e[&6CRAZEX&e] &aYou are now in gamemode &6Adventure!"
+        set the player's gamemode to adventure
+command /gms:
+    aliases: /gamemode s, /gamemodes
+    permission: skript.gamemode.s
+    permission message: &cInvaild Permission.
+    trigger:
+        send "&e[&6CRAZEX&e] &aYou are now in gamemode &6Survival!"
+        set the player's gamemode to survival
+command /gmc:
+    aliases: /gamemode c, /gamemodec
+    permission: skript.gamemode.c
+    permission message: &cInvaild Permission.
+    trigger:
+        send "&e[&6CRAZEX&e] &aYou are now in gamemode &6Creative!"
+        set the player's gamemode to creative
+command /gmsp:
+    aliases: /gamemode sp, /gamemodesp
+    permission: skript.gamemode.spec
+    permission message: &cInvaild Permission.
+    trigger:
+        send "&e[&6CRAZEX&e] &aYou are now in gamemode &6Spectator!"
+        set the player's gamemode to spectator
+
+command 
 
 
 command /pop:
@@ -55,106 +123,106 @@ on join:
   set score "" in sidebar of player to 6
   set score "&8¬ &7Players&8: &f%number of all players%" in sidebar of player to 5
   set score "" in sidebar of player to 4
-  set score "&8¬ &7EXP&8: &f%{xp1.%player%}%/30" in sidebar of player to 3
+  set score "&8¬ &7EXP&8: &f%{xp::%player%}%/30" in sidebar of player to 3
   set score "" in sidebar of player to 2
-  set score "&8¬ &7Level&8: &f%{lv1.%player%}%" in sidebar of player to 1
-  set score "" in sidebar of player to 0
+  set score "&8¬ &7Level&8: &f%{lv::%player%}%" in sidebar of player to 1
+    set score "" in sidebar of player to 0
 
 on break of coal ore:
-    if {xp1.%player%} >= 30:
-        add 1 to {lv1.%player%}
-        remove 30 from {xp1.%player%}
-        send "&6[CrazeX] &8» &7You leveled up to &e%{lv1.%player%}%&7!"
+    if {xp::%player%} >= 30:
+        add 1 to {lv::%player%}
+        remove 30 from {xp::%player%}
+        send "&6[CrazeX] &8» &7You leveled up to &e%{lv::%player%}%&7!"
     add 1 to {st}
     wipe player sidebar
     cancel event
+    add 1 to {xp::%player%}
+    add 1 to {bl::%player%}
+    give 1 coal to player
+    set block to black wool
     wipe player sidebar
     set name of sidebar of player to  "&6&lCrazeX"
     set score "" in sidebar of player to 6
     set score "&8¬ &7Players&8: &f%number of all players%" in sidebar of player to 5
     set score "" in sidebar of player to 4
-    set score "&8¬ &7EXP&8: &f%{xp1.%player%}%/30" in sidebar of player to 3
+    set score "&8¬ &7EXP&8: &f%{xp::%player%}%/30" in sidebar of player to 3
     set score "" in sidebar of player to 2
-    set score "&8¬ &7Level&8: &f%{lv1.%player%}%" in sidebar of player to 1
+    set score "&8¬ &7Level&8: &f%{lv::%player%}%" in sidebar of player to 1
     set score "" in sidebar of player to 0
-    add 1 to {xp1.%player%}
-    add 1 to {bl1.%player%}
-    give 1 coal to player
-    set block to black wool
     wait 60 seconds
     set block to coal ore
 
 
 on break of iron ore:
-    if {xp1.%player%} >= 30:
-        add 1 to {lv1.%player%}
-        remove 30 from {xp1.%player%}
-        send "&6[CrazeX] &8» &7You leveled up to &e%{lv1.%player%}%&7!"
+    if {xp::%player%} >= 30:
+        add 1 to {lv::%player%}
+        remove 30 from {xp::%player%}
+        send "&6[CrazeX] &8» &7You leveled up to &e%{lv::%player%}%&7!"
     cancel event
     add 1 to {st}
     wipe player sidebar
     cancel event
+    add 2 to {xp::%player%}
+    add 1 to {bl::%player%}
+    give 2 coal to player
+    set block to gray wool
     wipe player sidebar
     set name of sidebar of player to  "&6&lCrazeX"
     set score "" in sidebar of player to 6
     set score "&8¬ &7Players&8: &f%number of all players%" in sidebar of player to 5
     set score "" in sidebar of player to 4
-    set score "&8¬ &7EXP&8: &f%{xp1.%player%}%/30" in sidebar of player to 3
+    set score "&8¬ &7EXP&8: &f%{xp::%player%}%/30" in sidebar of player to 3
     set score "" in sidebar of player to 2
-    set score "&8¬ &7Level&8: &f%{lv1.%player%}%" in sidebar of player to 1
+    set score "&8¬ &7Level&8: &f%{lv::%player%}%" in sidebar of player to 1
     set score "" in sidebar of player to 0
-    add 2 to {xp1.%player%}
-    add 1 to {bl1.%player%}
-    give 2 coal to player
-    set block to gray wool
     wait 90 seconds
     set block to iron ore
 
 on break of diamond ore:
     cancel event
-    if {xp1.%player%} >= 30:
-        add 1 to {lv1.%player%}
-        remove 30 from {xp1.%player%}
-        send "&6[CrazeX] &8» &7You leveled up to &e%{lv1.%player%}%&7!"
+    if {xp::%player%} >= 30:
+        add 1 to {lv::%player%}
+        remove 30 from {xp::%player%}
+        send "&6[CrazeX] &8» &7You leveled up to &e%{lv::%player%}%&7!"
     add 1 to {st}
     wipe player sidebar
+    add 4 to {xp::%player%}
+    add 1 to {bl::%player%}
+    give 4 coal to player
+    set block to light blue wool
     wipe player sidebar
     set name of sidebar of player to  "&6&lCrazeX"
     set score "" in sidebar of player to 6
     set score "&8¬ &7Players&8: &f%number of all players%" in sidebar of player to 5
     set score "" in sidebar of player to 4
-    set score "&8¬ &7EXP&8: &f%{xp1.%player%}%/30" in sidebar of player to 3
+    set score "&8¬ &7EXP&8: &f%{xp::%player%}%/30" in sidebar of player to 3
     set score "" in sidebar of player to 2
-    set score "&8¬ &7Level&8: &f%{lv1.%player%}%" in sidebar of player to 1
+    set score "&8¬ &7Level&8: &f%{lv::%player%}%" in sidebar of player to 1
     set score "" in sidebar of player to 0
-    add 4 to {xp1.%player%}
-    add 1 to {bl1.%player%}
-    give 4 coal to player
-    set block to light blue wool
     wait 120 seconds
     set block to diamond ore
 
 on break of lapis ore:
     cancel event
-    if {xp1.%player%} >= 30:
-        add 1 to {lv1.%player%}
-        remove 30 from {xp1.%player%}
-        send "&6[CrazeX] &8» &7You leveled up to &e%{lv1.%player%}%&7!"
+    if {xp::%player%} >= 30:
+        add 1 to {lv::%player%}
+        remove 30 from {xp::%player%}
+        send "&6[CrazeX] &8» &7You leveled up to &e%{lv::%player%}%&7!"
     add 1 to {st}
     wipe player sidebar
+    add 5 to {xp::%player%}
+    add 1 to {bl::%player%}
+    give 5 coal to player
+    set block to blue wool
     wipe player sidebar
     set name of sidebar of player to  "&6&lCrazeX"
     set score "" in sidebar of player to 6
     set score "&8¬ &7Players&8: &f%number of all players%" in sidebar of player to 5
     set score "" in sidebar of player to 4
-    set score "&8¬ &7EXP&8: &f%{xp1.%player%}%/30" in sidebar of player to 3
+    set score "&8¬ &7EXP&8: &f%{xp::%player%}%/30" in sidebar of player to 3
     set score "" in sidebar of player to 2
-    set score "&8¬ &7Level&8: &f%{lv1.%player%}%" in sidebar of player to 1
+    set score "&8¬ &7Level&8: &f%{lv::%player%}%" in sidebar of player to 1
     set score "" in sidebar of player to 0
-    add 5 to {xp1.%player%}
-    add 1 to {bl1.%player%}
-    give 5 coal to player
-    set block to blue wool
     wait 180 seconds
     set block to lapis ore
 
@@ -181,10 +249,9 @@ command /stats [<offline player>]:
             send "&6&lSTATS"
             send "&6%arg-1%'s stats:"
             send ""
-            send "&e&lLevel: &7%{lv1.%arg-1%}%"
-            send "&e&lExperience: &7%{xp1.%arg-1%}%"
-            send "&e&lBlocks Broken: &7%{bl1.%arg-1%}%"
-            send "&eBubbles popped: &7%{b.%arg-1%}%"
+            send "&e&lLevel: &7%{lv1::%arg-1%}%"
+            send "&e&lExperience: &7%{xp::%arg-1%}%"
+            send "&e&lBlocks Broken: &7%{bl::%arg-1%}%"
             send "&eServer Blocks Broken: &7%{st}%"
             send ""
         if arg-1 is not set:
@@ -192,9 +259,46 @@ command /stats [<offline player>]:
             send "&6&lSTATS"
             send "&6Your stats:"
             send ""
-            send "&eLevel: &7%{lv1.%player%}%"
-            send "&eExperience: &7%{xp1.%player%}%/30"
-            send "&eBlocks Broken: &7%{bl1.%player%}%"
-            send "&eBubbles popped: &7%{b.%player%}%"
+            send "&eLevel: &7%{lv::%player%}%"
+            send "&eExperience: &7%{xp::%player%}%/30"
+            send "&eBlocks Broken: &7%{bl::%player%}%"
             send "&eServer Blocks Broken: &7%{st}%"
             send ""
+on command "pl":
+    cancel event
+    send "&cInvalid Permission"
+on command "bukkit:pl":
+    cancel event
+    send "&cInvalid Permission"
+
+command /gamemode <text>:
+    permission: skript.gamemode.use
+    trigger:
+        if arg-1 is "c":
+            send "&e[&6CRAZEX&e] &aYou are now in gamemode &6Creative!"
+            set the player's gamemode to creative
+        if arg-1 is "s":
+            send "&e[&6CRAZEX&e] &aYou are now in gamemode &6Survival!"
+            set the player's gamemode to survival
+        if arg-1 is "a":
+            send "&e[&6CRAZEX&e] &aYou are now in gamemode &6Adventure!"
+            set the player's gamemode to adventure
+        if arg-1 is "sp":
+            send "&e[&6CRAZEX&e] &aYou are now in gamemode &6Spectator!"
+            set the player's gamemode to spectator
+        if arg-1 is not set:
+            send "&e[&6CRAZEX&e] &dUsage: /gamemode <c:s:a:sp>"
+
+
+
+on chat:
+	loop all players:
+		if "%message%" contains "%loop-player%":
+			replace all "%loop-player%" with "&6@&e%loop-player% &r" in message
+
+
+on quit:
+    send ""
+    send "&a Join back with /join CrazeX"
+    send "&aCrazeX.minehut.gg"
+    send ""
