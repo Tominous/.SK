@@ -1,0 +1,45 @@
+command /clearchat:
+    aliases: /cc
+    permission: skript.use
+    permission message: &cSorry, but you can't execute this command!
+    trigger:
+        loop 300 times:
+            broadcast ""
+        wait 1 tick
+        broadcast "&7&l[&c&l!&f&l] &cThe chat has been cleared by &4%player%"
+        stop
+
+command /ban <player> <text>:
+    aliases: /cban, 
+    permission: skript.use
+    permission message: &cSorry, but you can't execute this command!
+    trigger:
+        if arg-1 is not set:
+            send "&cUsage: /ban <user> <reason>"
+        if arg-1 is set:
+            if arg-2 is not set:
+                send "&cUsage: /ban <user> <reason>"
+        if arg-1 is set:
+            if arg-2 is set:
+                broadcast "&6[CRAZEX] &4%player% &chas banned &4%arg-1% &cfor &4%arg-2%"
+                execute console command "/minecraft:ban %arg-1% %arg-2%"
+command /unban <player>:
+    aliases: /cuban, 
+    permission: skript.use
+    permission message: &cSorry, but you can't execute this command!
+    trigger:
+        if arg-1 is not set:
+            send "&cUsage: /unban <user>"
+        if arg-1 is set:
+            broadcast "&6[CRAZEX] &4%player% &chas unbanned &4%arg-1%"
+            execute console command "/minecraft:pardon %arg-1%"
+command /kick <player>:
+    aliases: /ckick
+    permission: skript.use
+    permission message: &cSorry, but you can't execute this command!
+    trigger:
+        if arg-1 is not set:
+            send "&cUsage: /kick <user>"
+        if arg-1 is set:
+            send "&6[CRAZEX] &aYou've kicked %arg-1%"
+            execute console command "/minecraft:kick %arg-1% You've been kicked"
