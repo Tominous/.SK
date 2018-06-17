@@ -126,7 +126,7 @@ on join:
   set score "&8¬ &7EXP&8: &f%{xp::%player%}%/30" in sidebar of player to 3
   set score "" in sidebar of player to 2
   set score "&8¬ &7Level&8: &f%{lv::%player%}%" in sidebar of player to 1
-    set score "" in sidebar of player to 0
+  set score "" in sidebar of player to 0
 
 on break of coal ore:
     if {xp::%player%} >= 30:
