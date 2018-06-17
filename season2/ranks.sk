@@ -1,74 +1,12 @@
 options:
-	p: &8[&6&lCRAZEX&8] 
 	a: »	
 
-command /pex:
-	permission: skript.use
-	permission message: {@p} &cNo permissions!
-	trigger:
-		send "&cUse /rank instead!"
 
+on first join:
+    add 1 to {logins}
+    broadcast "&8[&a+&8] &7%player% has joined for the first time! &8[&a##%{logins}%&8]"
 
-command /rank [<text>] [<offline player>] [<text>]: #the command
-	permission: rank.admin
-	permission message: {@p} &cNo permissions!
-	trigger:
-		if arg 1 is not set:
-			send "&c-----------------------------------------------------"
-			send "&4/rank set <player> <rank> &8:: &7Set a player's rank"
-			send "&4/rank list &8:: &7Shows yo the list of all groups"
-			send "&4/rank reset <player> &8:: &7Resets the rank of a player to &7&lMember"
-			send "&4/rank info &8:: &7Shows some info about this skript"
-			send "&4/rank prefix <player> <prefix> &8:: &7Give someone a custom prefix"
-			send "&c-----------------------------------------------------"
-		if arg 1 is "set":
-			if arg 2 is set:
-				if arg 3 is "admin":
-					set {rank.%arg 2%} to "&c&lADMIN"
-					send "{@p} &6%arg 2% &eis our NEW &a&lAdmin"
-				if arg 3 is "srmod":
-					set {rank.%arg 2%} to "&e&lSRMOD"
-					send "{@p} &6%arg 2% &eis our NEW &a&lSr. Mod"
-				if arg 3 is "mod":
-					set {rank.%arg 2%} to "&e&lMOD"
-					send "{@p} &6%arg 2% &eis a NEW &a&lMod"
-				if arg 3 is "expert":
-					set {rank.%arg 2%} to "&6&lEXPERT"
-				if arg 3 is "member":
-					set {rank.%arg 2%} to "&7&lMEMBER"
-		if arg 1 is "list":
-			send "&c--------------------------------------------"
-			send "&c&lAdmin &7==> &fGroup Name: &8admin"
-			send "&a&lSr. Mod &7==> &fGroup Name: &8srmod"
-			send "&a&lMod &7==> &fGroup Name: &8mod"
-			send "&7&lMember &7==> &fGroup Name: &8member"
-			send "&c--------------------------------------------"
-		if arg 1 is "info":
-			send "&c--------------------------------------------"
-			send "&4Skript made by &cRazviti"
-			send "&4Version &c1.0"
-			send "&c--------------------------------------------"
-		if arg 1 is "reset":
-			if arg 2 is set:
-				set {rank.%arg 2%} to "&7&lMember"
-				send "{@p} &cThe rank of &4%arg 2% &chas been reset to &7&lMember"
-				send "{@p} &cYour rank has been reset to &7&lMember &cby &4%player%" to arg 2
-			else:
-				send "{@p} &8Please specify a player!"
-		if arg 1 is "prefix":
-			if arg 2 is set:
-				if arg 3 is set:
-					set {rank.%arg 2%} to "%coloured arg 3%"
-					send "{@p} &cPrefix of &4%arg 2% &chas been set to: %coloured arg-3%"
-					send "{@p} &cYour prefix is now changed by &4%player%&c. Prefix is now %coloured arg-3%" to arg 2
-				else:
-					send "{@p} &8Please give avalid prefix!"
-			else:
-				send "{@p} &8Please specify a player!" #all in 1 command 
+on chat:
+    cancel event
+    broadcast "&8[&a%{lv1.%player%}%&8] &r%colored player's prefix% &8» &7%player% &r%colored player's suffix% &8» &f%message%" 
 
-on chat: # chat format
-	cancel event
-	broadcast "&8[&a%{lv1.%player%}%&8]&r %{rank.%player%}% &8{@a} &7%player% &8{@a} &f%message%"
-
-on first join: # and for first join
-	set {rank.%player%} to "&7&lMember"
