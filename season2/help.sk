@@ -1,0 +1,15 @@
+command /help [<number>]:
+    usage: &c/help <page>
+    trigger:
+        if arg-1 is not set:
+            send "&6&lCRAZEX &8- &eHelp &8- &61/1"
+            send "&6/shop &7- Server Shop"
+            send "&6/discord &7- Server Discord"
+            send "&6/raz&7 - Razviti Commands"
+            send "&6/help &7- Server Help"
+        if arg-1 is set:
+            send "&6&lCRAZEX &8- &eHelp &8- &61/1"
+            send "&6/shop &7- Server Shop"
+            send "&6/discord &7- Server Discord"
+            send "&6/raz&7 - Razviti Commands"
+            send "&6/help &7- Server Help"   
