@@ -1,0 +1,9 @@
+command /ec:
+       aliases: /echest, /enderchest, /enderc
+       trigger:
+              open the player's ender chest to the player
+              send "&cOpened your enderchest!"
+command /raz:
+       trigger:
+              send "&aComing soon!"
+
