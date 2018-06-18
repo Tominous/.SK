@@ -1,0 +1,5 @@
+on chat:
+	loop all players:
+		if "%message%" contains "%loop-player%":
+			replace all "%loop-player%" with "&6@&e%loop-player% &r" in message
+			execute console command "execute %loop-player% ~ ~ ~ playsound block.note.pling master @p ~ ~ ~ 1000 1.0"
