@@ -1,12 +1,10 @@
 options:
 	a: »	
 
-
 on first join:
     add 1 to {logins}
     broadcast "&8[&a+&8] &7%player% has joined for the first time! &8[&a##%{logins}%&8]"
 
 on chat:
     cancel event
-    broadcast "&8[&a%{lv1.%player%}%&8] &r%colored player's prefix% &8» &7%player% &r%colored player's suffix% &8» &f%message%" 
-
+    broadcast "&8[&aP%{pr::%player%}%&8]&8[&a%{lv::%player%}%&8] &r%colored player's prefix% &8» &7%player% &r%colored player's suffix% &8» &f%message%" 
