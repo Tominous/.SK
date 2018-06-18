@@ -1,0 +1,25 @@
+command /prestige:
+       trigger:
+              if {lv::%player%} >= 100:
+                     add 1 to {pr::%player%}
+                     clear the player's inventory
+                     teleport the player to {spawn} 
+                     execute player command "/pickaxe"
+                     give player a chest named "&b&lMenu &7(Right-Click)"
+                     send "&bYou've successfully prestiged!"
+                     set {lv::%player%} to 0
+                     set {coins::%player%} to 0
+                     set {xp::%player%} to 0
+                     wipe player sidebar
+                     set name of sidebar of player to  "&6&lCrazeX"
+                     set score "" in sidebar of player to 6
+                     set score "&8¬ &7Players&8: &f%number of all players%" in sidebar of player to 5
+                     set score "" in sidebar of player to 4
+                     set score "&8¬ &7EXP&8: &f%{xp::%player%}%/30" in sidebar of player to 3
+                     set score "" in sidebar of player to 2
+                     set score "&8¬ &7Level&8: &f%{lv::%player%}%" in sidebar of player to 1
+                     set score "" in sidebar of player to 0
+                     stop
+              send "&e[&6CRAZEX&e] &7You have to be level 100 to prestige!"
+
+ 
