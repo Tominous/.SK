@@ -1,0 +1,156 @@
+command /shop:
+    trigger:
+        open virtual chest inventory named "&b&lShop" to player
+        wait 1.3 ticks
+        format gui slot 0 of player with gray glass named "&b"
+        wait 1.3 ticks
+        format gui slot 8 of player with gray glass named "&b"
+        wait 1.3 ticks
+        format gui slot 18 of player with gray glass named "&b"
+        wait 1.3 ticks
+        format gui slot 26 of player with gray glass named "&b"
+        wait 2 ticks
+        format gui slot 11 of player with book named "&c&lTags" to close then run function Tags(player)
+        format gui slot 13 of player with book named "&c&lEnchants" to close then run function Enchants(player)
+
+function Enchants(p: player):
+    open virtual chest inventory named "&b&lCustom Enchants" to {_p}
+    wait 1.3 ticks
+    format gui slot 0 of {_p} with gray glass named "&b"
+    wait 1.3 ticks
+    format gui slot 8 of {_p} with gray glass named "&b"
+    wait 1.3 ticks
+    format gui slot 18 of {_p} with gray glass named "&b"
+    wait 1.3 ticks
+    format gui slot 26 of {_p} with gray glass named "&b"
+    wait 2 ticks
+    format gui slot 11 of {_p} with book named "&e&lEfficiency" to close then run function Eff({_p})
+    format gui slot 13 of {_p} with book named "&6&lInvest" to close then run function Invest({_p})
+    format gui slot 15 of {_p} with book named "&d&lFortune" to close 
+
+command /tags:
+    trigger:
+        Tags(player)
+
+
+
+
+function Tags(p: player):
+    open virtual chest inventory named "&b&lCustom Tags" to {_p}
+    wait 1.3 ticks
+    format gui slot 0 of {_p} with gray glass named "&b"
+    wait 1.3 ticks
+    format gui slot 8 of {_p} with gray glass named "&b"
+    wait 1.3 ticks
+    format gui slot 18 of {_p} with gray glass named "&b"
+    wait 1.3 ticks
+    format gui slot 26 of {_p} with gray glass named "&b"
+    wait 2 ticks
+    format gui slot 10 of {_p} with book named "&e[&6CRAZEX&e]" to close then run function CrazeX({_p}) 
+    format gui slot 11 of {_p} with book named "&e[&3EXPERT&e] &7Requires Level 25" to close then run function CS({_p})
+    format gui slot 12 of {_p} with book named "&6&lComing Soon" to close then run function CS({_p})
+    format gui slot 13 of {_p} with book named "&6&lComing Soon" to close then run function CS({_p})
+    format gui slot 14 of {_p} with book named "&6&lComing Soon" to close then run function CS({_p})
+    format gui slot 15 of {_p} with book named "&6&lComing Soon" to close then run function CS({_p})
+    format gui slot 16 of {_p} with book named "&6&lComing Soon" to close then run function CS({_p})
+    wait 1 tick
+    format gui slot 22 of {_p} with barrier named "&c&lRemove Tag" to close then run function RT({_p})
+
+function CrazeX(p: player):
+    set {suffix::%{_p}%} to "&e[&6CRAZEX&e]"
+    send "&3Tags &8// &7Set your tag to &7&e[&6CRAZEX&e]!" to {_p}
+
+function RT(p: player):
+    set {suffix::%{_p}%} to "&b"
+    send "&3Tags &8// &7Removed your tag!" to {_p}
+
+function CS(p: player):
+    send {_p} title "&3&lComing" with subtitle "&rsoon!" for 1.5 seconds with 1 second fade in and 1.5 seconds fade out
+
+
+function Invest(p: player):
+    if lore of {_p}'s tool contains "&6&lINVEST &7(&e1&7)":
+        send "&cEnchants &8// &7You already have the max &6Invest&7." to {_p}
+        stop
+    if {coins::%{_p}%} >= 100:
+        if {_p} is holding a pickaxe:
+            remove 100 from {coins::%{_p}%}
+            set line 1 of lore of {_p}'s tool to "&6&lINVEST &7(&e1&7)"
+            send "&cEnchants &8// &7You now have the &dInvest &7enchantment!" to {_p}
+            stop
+        send "&cEnchants &8// &7You must be holding your pickaxe" to {_p}
+    else:
+        send "&cEnchants &8// &7You need &8100 &7coins to buy invest" to {_p}
+
+function Eff(p: player):
+    if lore of {_p}'s tool contains "&d&lEFFICENCY &7(&e1&7)":
+        send "&cEnchants &8// &7You already have the max &6Efficiency&7." to {_p}
+        stop
+    if {coins::%{_p}%} >= 250:
+        if {_p} is holding a diamond pickaxe:
+            send "&cEnchants &8// &7You can't enchant your Efficiency 20 pickaxe to eff 1!" to {_p}
+            stop
+        if {_p} is holding a pickaxe:
+            remove 250 from {coins::%{_p}%}
+            set line 2 of lore of {_p}'s tool to "&d&lEFFICIENCY &7(&e1&7)"
+            enchant {_p}'s tool with efficiency 3
+            send "&cEnchants &8// &7You now have the &dEfficiency &7enchantment!" to {_p}
+            stop
+        send "&cEnchants &8// &7You must be holding your pickaxe" to {_p}
+    else:
+        send "&cEnchants &8// &7You need &8250 &7coins to buy Efficiency" to {_p}
+
+
+on mine:
+        if lore of player's tool contains "&6&lINVEST &7(&e1&7)":
+                chance of 15%:
+                        send "&cEnchants &8// &7The &6invest &7enchantment found you a crate!"
+                        give player a enchantment_table named "&b&lCrate &8(Right-Click)"
+                chance of 25%:
+                        add 23 to {xp::%player%}
+                        send player title "&6&lInvest!" with subtitle "&eEarned &6&n+23 &exp!" for 1.5 seconds with 1 second fade in and 1.5 seconds fade out
+
+
+
+command /coin:
+    permission: coin.add
+    trigger:
+        set {coins::%player%} to 300
+
+
+on right-click:
+    if player's held item is enchantment_table:
+        chance of 25%:
+            add 23 to {xp::%player%}
+            send player title "&6&lSuccess!" with subtitle "&eEarned &6&n+23 &exp!" for 1.5 seconds with 1 second fade in and 1.5 seconds fade out
+            remove 1 enchantment_table from player's inventory
+        chance of 75%:
+            send player title "&c&lMisfortune!" with subtitle "&cFound &4nothing :(" for 1.5 seconds with 1 second fade in and 1.5 seconds fade out
+            remove 1 enchantment_table from player's inventory
+
+
+    if player's held item is chest:
+        execute console command "execute %player% ~ ~ ~ playsound block.note.pling master @p ~ ~ ~ 1000 1.0"
+        cancel event
+        open virtual chest inventory named "&b&lMenu" to player
+        wait 1.3 ticks
+        format gui slot 0 of player with gray glass named "&b"
+        wait 1.3 ticks
+        format gui slot 8 of player with gray glass named "&b"
+        wait 1.3 ticks
+        format gui slot 18 of player with gray glass named "&b"
+        wait 1.3 ticks
+        format gui slot 26 of player with gray glass named "&b"
+        wait 2 ticks
+        format gui slot 4 of player with torch named "&6&lCoinTop" to close then execute player command "/coinstop"
+        wait 1.3 ticks
+        format gui slot 12 of player with sunflower named "&6&lYour Coins: &e&l%{coins::%player%}%" to close
+        format gui slot 13 of player with book named "&c&lLevel Top" to close then execute player command "/leveltop"
+        format gui slot 14 of player with diamond pickaxe named "&b&lShop" to close then execute player command "/shop"
+        wait 1.3 ticks
+        format gui slot 22 of player with diamond sword named "&e&lStats" to close then execute player command "/stats"
+
+command /trash:
+    aliases: /dispose, /rubbish
+    trigger:
+        open virtual player inventory named "&b&lTrash" to player
