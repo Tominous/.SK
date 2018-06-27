@@ -1,0 +1,113 @@
+on break of coal ore:
+    if {lv::%player%} = 10:
+        set {lv::%player%} to 11
+        teleport the player to {spawn}
+        send "&e[&6CRAZEX&e] &7You have earned the &6stone &7pickaxe&&6!"
+        execute console command "/minecraft:give %player% stone_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy:[coal_ore,iron_ore]}"
+        stop
+    if {lv::%player%} = 25:
+        set {lv::%player%} to 26
+        teleport the player to {spawn}
+        send "&e[&6CRAZEX&e] &7You have earned the &6iron &7pickaxe&&6!"
+        execute console command "/minecraft:give %player% iron_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy:[coal_ore,iron_ore,diamond_ore]}"
+        stop
+    if {lv::%player%} = 50:
+        set {lv::%player%} to 51
+        teleport the player to {spawn}
+        send "&e[&6CRAZEX&e] &7You have earned the &6golden &7pickaxe&&6!"
+        execute console command "/minecraft:give %player% golden_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy:[coal_ore,iron_ore,diamond_ore,lapis_ore]}"
+        stop
+    if {lv::%player%} = 80:
+        set {lv::%player%} to 81
+        teleport the player to {spawn}
+        send "&e[&6CRAZEX&e] &7You have earned the &6special &7pickaxe&&6!"
+        execute console command "/minecraft:give %player% diamond_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy:[coal_ore,iron_ore,diamond_ore,lapis_ore],ench:[{id:32,lvl:10}]}"
+        stop
+
+
+
+
+
+on break of iron ore:
+    if {lv::%player%} = 10:
+        set {lv::%player%} to 11
+        teleport the player to {spawn}
+        send "&e[&6CRAZEX&e] &7You have earned the &6stone &7pickaxe&&6!"
+        execute console command "/minecraft:give %player% stone_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy:[coal_ore,iron_ore]}"
+        stop
+    if {lv::%player%} = 25:
+        set {lv::%player%} to 26
+        teleport the player to {spawn}
+        send "&e[&6CRAZEX&e] &7You have earned the &6iron &7pickaxe&&6!"
+        execute console command "/minecraft:give %player% iron_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy:[coal_ore,iron_ore,diamond_ore]}"
+        stop
+    if {lv::%player%} = 50:
+        set {lv::%player%} to 51
+        teleport the player to {spawn}
+        send "&e[&6CRAZEX&e] &7You have earned the &6golden &7pickaxe&&6!"
+        execute console command "/minecraft:give %player% golden_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy:[coal_ore,iron_ore,diamond_ore,lapis_ore]}"
+        stop
+    if {lv::%player%} = 80:
+        set {lv::%player%} to 81
+        teleport the player to {spawn}
+        send "&e[&6CRAZEX&e] &7You have earned the &6special &7pickaxe&&6!"
+        execute console command "/minecraft:give %player% diamond_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy:[coal_ore,iron_ore,diamond_ore,lapis_ore],ench:[{id:32,lvl:10}]}"
+        stop
+
+
+
+
+on break of diamond ore:
+    if {lv::%player%} = 10:
+        set {lv::%player%} to 11
+        teleport the player to {spawn}
+        send "&e[&6CRAZEX&e] &7You have earned the &6stone &7pickaxe&&6!"
+        execute console command "/minecraft:give %player% stone_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy:[coal_ore,iron_ore]}"
+        stop
+    if {lv::%player%} = 25:
+        set {lv::%player%} to 26
+        teleport the player to {spawn}
+        send "&e[&6CRAZEX&e] &7You have earned the &6iron &7pickaxe&&6!"
+        execute console command "/minecraft:give %player% iron_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy:[coal_ore,iron_ore,diamond_ore]}"
+        stop
+    if {lv::%player%} = 50:
+        set {lv::%player%} to 51
+        teleport the player to {spawn}
+        send "&e[&6CRAZEX&e] &7You have earned the &6golden &7pickaxe&&6!"
+        execute console command "/minecraft:give %player% golden_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy:[coal_ore,iron_ore,diamond_ore,lapis_ore]}"
+        stop
+    if {lv::%player%} = 80:
+        set {lv::%player%} to 81
+        teleport the player to {spawn}
+        send "&e[&6CRAZEX&e] &7You have earned the &6special &7pickaxe&&6!"
+        execute console command "/minecraft:give %player% diamond_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy:[coal_ore,iron_ore,diamond_ore,lapis_ore],ench:[{id:32,lvl:10}]}"
+        stop
+
+
+
+
+on break of lapis ore:
+    if {lv::%player%} = 10:
+        set {lv::%player%} to 11
+        teleport the player to {spawn}
+        send "&e[&6CRAZEX&e] &7You have earned the &6stone &7pickaxe&&6!"
+        execute console command "/minecraft:give %player% stone_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy:[coal_ore,iron_ore]}"
+        stop
+    if {lv::%player%} = 25:
+        set {lv::%player%} to 26
+        teleport the player to {spawn}
+        send "&e[&6CRAZEX&e] &7You have earned the &6iron &7pickaxe&&6!"
+        execute console command "/minecraft:give %player% iron_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy:[coal_ore,iron_ore,diamond_ore]}"
+        stop
+    if {lv::%player%} = 50:
+        set {lv::%player%} to 51
+        teleport the player to {spawn}
+        send "&e[&6CRAZEX&e] &7You have earned the &6golden &7pickaxe&&6!"
+        execute console command "/minecraft:give %player% golden_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy:[coal_ore,iron_ore,diamond_ore,lapis_ore]}"
+        stop
+    if {lv::%player%} = 80:
+        set {lv::%player%} to 81
+        teleport the player to {spawn}
+        send "&e[&6CRAZEX&e] &7You have earned the &6special &7pickaxe&&6!"
+        execute console command "/minecraft:give %player% diamond_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy:[coal_ore,iron_ore,diamond_ore,lapis_ore],ench:[{id:32,lvl:10}]}"
+        stop
