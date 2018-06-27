@@ -1,0 +1,16 @@
+command /help [<text>]:
+    usage: &c/help <page>
+    trigger:
+        if arg-1 is not set:
+            send "&6&lCRAZEX &8- &eHelp &8- &61/2"
+            send "&6/sc &7- Get the staff commands!"
+            send "&6/shop &7- Server Shop"
+            send "&6/links &7- Server Links"
+            send "&6/raz&7 - Razviti Commands"
+            send "&6/pickaxe&7 - Starter Pickaxe"
+            send "&6/leveltop&7 - Top 10 Levels"
+        if arg-1 is "2":
+            send "&6&lCRAZEX &8- &eHelp &8- &62/2"
+            send "&6/prestigetop&7 - Top 10 Prestiges"
+            send "&6/coinstop&7 - Top 10 Coins"
+
