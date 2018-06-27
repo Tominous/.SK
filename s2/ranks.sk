@@ -1,0 +1,19 @@
+options:
+	a: »	
+
+on first join:
+    add 1 to {logins}
+    broadcast "&8[&a+&8] &7%player% has joined for the first time! &8[&a##%{logins}%&8]"
+
+on chat:
+    cancel event
+    json2("@a", "&8[&aP%{pr::%player%}%&8] &8[&a%{lv::%player%}%&8] &r%colored player's prefix% &8» &7%player% &r%{suffix::%player%}% &8» &f%message%|adminhere|ttp:&6&l%player%'s STATS\n\n&eLevel: &6%{lv::%player%}%\n&eXP: &6%{xp::%player%}%\n&eCoins: &6%{coins::%player%}%", true)
+
+
+every 2 seconds:
+    loop all players:
+        set the loop-player's tablist name to "%colored loop-player's prefix% &7%name of loop-player% &r%{suffix::%loop-player%}%"
+
+
+on join:
+    set the player's tablist name to "%colored player's prefix% &7%name of player% &r%{suffix::%player%}%"
