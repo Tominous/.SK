@@ -1,0 +1,343 @@
+on first join:
+    add 1 to {logins}
+    broadcast "&8[&a+&8] &7%player% has joined for the first time! &8[&a##%{logins}%&8]"
+
+on join:
+    if {coins::%player%} is not set:
+        set {coins::%player%} to 0
+    if {lv::%player%} is not set:
+        set {lv::%player%} to 0
+    if {xp::%player%} is not set:
+        set {xp::%player%} to 0
+    if {pr::%player%} is not set:
+        set {pr::%player%} to 0
+    if {suffix::%player%} is not set:
+        set {suffix::%player%} to ""
+    teleport player to {spawn}
+
+    
+
+command /setspawn:
+    permission: skript.use
+    permission message: &cNo Thank you!
+    trigger:
+        set {spawn} to player's location
+        send "&cSuccessfully set the spawn to your location!"
+command /spawn:
+    trigger:
+        execute console command "execute %player% ~ ~ ~ playsound block.note.pling master @p ~ ~ ~ 1000 0.5"
+        teleport player to {spawn}
+        send "&7[&6CRAZEX&7] &eTeleported you to spawn!"
+
+command /pickaxe:
+    aliases: /starter
+    trigger:
+        give player a chest named "&b&lMenu &7(Right-Click)"
+        execute console command "/minecraft:give %player% wooden_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy:[coal_ore]}"
+        send "&e[&6CRAZEX&e]&a You have acquired the &6starter pickaxe!"
+
+
+variables:
+	{xp::%player%} = 0
+	{lv::%player%} = 0
+
+every 10 seconds:
+    loop all players:
+        heal the loop-player
+        feed the loop-player
+        if {xp::%loop-player%} >= 30:
+            add 1 to {lv::%loop-player%}
+            remove 30 from {xp::%loop-player%}
+            send "&6[CrazeX] &8» &7You leveled up to &e%{lv::%loop-player%}%&7!" to loop-player
+
+every 2 seconds:
+    loop all players:
+        if {xp::%loop-player%} >= 30:
+            add 1 to {lv::%loop-player%}
+            remove 30 from {xp::%loop-player%}
+            send "&6[CrazeX] &8» &7You leveled up to &e%{lv::%loop-player%}%&7!" to loop-player
+
+on command "minecraft:me":   
+    cancel event
+    send "&cInvalid Permission!"
+
+on first join:
+    set {xp::%player%} to 0
+    set {lv::%player%} to 0
+    set {coins::%player%} to 0
+    set {bl::%player%} to 0
+    set {w.%player%} to 0
+    set {b.%player%} to 0
+    set gamemode of player to Adventure
+
+command /logins:
+    trigger:
+        send "&aWe have %{logins}% logins currently!"
+command /gma:
+    aliases: /gamemode a, /gamemodea
+    permission: skript.gaemode.a
+    permission message: &cInvaild Permission.
+    trigger:
+        send "&e[&6CRAZEX&e] &aYou are now in gamemode &6Adventure!"
+        set the player's gamemode to adventure
+command /gms:
+    aliases: /gamemode s, /gamemodes
+    permission: skript.gamemode.s
+    permission message: &cInvaild Permission.
+    trigger:
+        send "&e[&6CRAZEX&e] &aYou are now in gamemode &6Survival!"
+        set the player's gamemode to survival
+command /gmc:
+    aliases: /gamemode c, /gamemodec
+    permission: skript.gamemode.c
+    permission message: &cInvaild Permission.
+    trigger:
+        send "&e[&6CRAZEX&e] &aYou are now in gamemode &6Creative!"
+        set the player's gamemode to creative
+command /gmsp:
+    aliases: /gamemode sp, /gamemodesp
+    permission: skript.gamemode.spec
+    permission message: &cInvaild Permission.
+    trigger:
+        send "&e[&6CRAZEX&e] &aYou are now in gamemode &6Spectator!"
+        set the player's gamemode to spectator
+
+command /pop:
+    aliases: /bubble, /bubbles
+    trigger:
+        add 1 to {b.%player%}
+        send "&aYou've popped &c%{b.%player%}% &abubbles!"
+
+on join:
+    set gamemode of player to Adventure
+    set {w.%player%} to 0
+
+on break of coal ore:
+    if {lv::%player%} >= 100:
+        cancel event
+        send "&bYou are at the max level! &a/prestige &bto restart!"
+        stop
+    add 1 to {coins::%player%}
+    if {xp::%player%} >= 30:
+        add 1 to {lv::%player%}
+        remove 30 from {xp::%player%}
+        send "&6[CrazeX] &8» &7You leveled up to &e%{lv::%player%}%&7!"
+    add 1 to {st}
+    wipe player sidebar
+    cancel event
+    add 1 to {xp::%player%}
+    add 1 to {bl::%player%}
+    set block to black wool
+    wait 60 seconds
+    set block to coal ore
+
+
+on break of iron ore:
+    if {lv::%player%} >= 100:
+        cancel event
+        send "&bYou are at the max level! &a/prestige &bto restart!"
+        stop
+    add 2 to {coins::%player%}
+    if {xp::%player%} >= 30:
+        add 1 to {lv::%player%}
+        remove 30 from {xp::%player%}
+        send "&6[CrazeX] &8» &7You leveled up to &e%{lv::%player%}%&7!"
+    cancel event
+    add 1 to {st}
+    wipe player sidebar
+    cancel event
+    add 2 to {xp::%player%}
+    add 1 to {bl::%player%}
+    set block to gray wool
+    wait 90 seconds
+    set block to iron ore
+
+on break of diamond ore:
+    if {lv::%player%} >= 100:
+        cancel event
+        send "&bYou are at the max level! &a/prestige &bto restart!"
+        stop
+    add 3 to {coins::%player%}
+    cancel event
+    if {xp::%player%} >= 30:
+        add 1 to {lv::%player%}
+        remove 30 from {xp::%player%}
+        send "&6[CrazeX] &8» &7You leveled up to &e%{lv::%player%}%&7!"
+    add 1 to {st}
+    wipe player sidebar
+    add 4 to {xp::%player%}
+    add 1 to {bl::%player%}
+    set block to light blue wool
+    wait 120 seconds
+    set block to diamond ore
+
+on break of lapis ore:
+    if {lv::%player%} >= 100:
+        cancel event
+        send "&bYou are at the max level! &a/prestige &bto restart!"
+        stop
+    add 5 to {coins::%player%}
+    cancel event
+    if {xp::%player%} >= 30:
+        add 1 to {lv::%player%}
+        remove 30 from {xp::%player%}
+        send "&6[CrazeX] &8» &7You leveled up to &e%{lv::%player%}%&7!"
+    add 1 to {st}
+    wipe player sidebar
+    add 5 to {xp::%player%}
+    add 1 to {bl::%player%}
+    set block to blue wool
+    wait 180 seconds
+    set block to lapis ore
+
+
+
+command /stats [<offline player>]:
+    usage: &c/stats <player>
+    trigger:
+        if arg-1 is set:
+            send ""
+            send "&6&lSTATS"
+            send "&6%arg-1%'s stats:"
+            send ""
+            send "&e&lLevel: &7%{lv::%arg-1%}%"
+            send "&e&lExperience: &7%{xp::%arg-1%}%/30"
+            send "&e&lBlocks Broken: &7%{bl::%arg-1%}%"
+            send "&e&lCoins: &7%{coins::%arg-1%}%"
+            send "&e&lPrestiges: &7%{pr::%arg-1%}%"
+            send "&e&lServer Blocks Broken: &7%{st}%"
+            send ""
+        if arg-1 is not set:
+            send ""
+            send "&6&lSTATS"
+            send "&6Your stats:"
+            send ""
+            send "&e&lLevel: &7%{lv::%player%}%"
+            send "&e&lExperience: &7%{xp::%player%}%/30"
+            send "&e&lBlocks Broken: &7%{bl::%player%}%"
+            send "&e&lCoins: &7%{coins::%player%}%"
+            send "&e&lPrestiges: &7%{pr::%player%}%"
+            send "&e&lServer Blocks Broken: &7%{st}%"
+            send ""
+
+
+
+on command "pl":
+    cancel event
+    send "&cInvalid Permission"
+on command "bukkit:pl":
+    cancel event
+    send "&cInvalid Permission"
+
+command /gamemode <text>:
+    permission: skript.gamemode.use
+    trigger:
+        if arg-1 is "c":
+            send "&e[&6CRAZEX&e] &aYou are now in gamemode &6Creative!"
+            set the player's gamemode to creative
+        if arg-1 is "s":
+            send "&e[&6CRAZEX&e] &aYou are now in gamemode &6Survival!"
+            set the player's gamemode to survival
+        if arg-1 is "a":
+            send "&e[&6CRAZEX&e] &aYou are now in gamemode &6Adventure!"
+            set the player's gamemode to adventure
+        if arg-1 is "sp":
+            send "&e[&6CRAZEX&e] &aYou are now in gamemode &6Spectator!"
+            set the player's gamemode to spectator
+        if arg-1 is not set:
+            send "&e[&6CRAZEX&e] &dUsage: /gamemode <c:s:a:sp>"
+
+    
+command /coins:
+    aliases: /bal, /balence
+    trigger:
+        if {coins::%player%} is not set:
+            send "&7You have no coins, setting to 0."
+            set {coins::%player%} to 0
+        if {coins::%player%} is set:
+            send "&6Your Coins: &e%{coins::%player%}%"
+            
+command /coinstop:
+    aliases: /cointop, /baltop, /balencetop
+    trigger:
+        loop {coins::*}:
+            add 1 to {_size}
+            if {_low.to.high.list::%loop-value%} is not set:
+                set {_low.to.high.list::%loop-value%} to loop-index
+            else:
+                set {_n} to 0
+                loop {_size} times:
+                    set {_n} to {_n} + 1
+                    if {_low.to.high.list::%loop-value-1%.%{_n}%} is not set:
+                        set {_low.to.high.list::%loop-value-1%.%{_n}%} to loop-index
+                    stop loop
+        wait 1 tick
+        set {_n} to size of {_low.to.high.list::*}
+        loop {_low.to.high.list::*}:
+            set {_high.to.low.list::%{_n}%} to loop-value
+            set {_n} to {_n} - 1
+        wait 1 tick
+        send "   &8&m---+---&r &e&lTop 10 Balances&r &8&m---+---   "
+        send ""
+        loop {_high.to.low.list::*}:
+            add 1 to {_topnumber}
+            set {_player} to "%loop-value%" parsed as offlineplayer
+            send "    &6%{_topnumber}%&6. &e%{_player}% &8➭ &6%{coins::%loop-value%}% &eCoins"
+            if {_topnumber} = 10:
+                stop
+                
+command /leveltop:
+    trigger:
+        loop {lv::*}:
+            add 1 to {_size}
+            if {_low.to.high.list::%loop-value%} is not set:
+                set {_low.to.high.list::%loop-value%} to loop-index
+            else:
+                set {_n} to 0
+                loop {_size} times:
+                    set {_n} to {_n} + 1
+                    if {_low.to.high.list::%loop-value-1%.%{_n}%} is not set:
+                        set {_low.to.high.list::%loop-value-1%.%{_n}%} to loop-index
+                    stop loop
+        wait 1 tick
+        set {_n} to size of {_low.to.high.list::*}
+        loop {_low.to.high.list::*}:
+            set {_high.to.low.list::%{_n}%} to loop-value
+            set {_n} to {_n} - 1
+        wait 1 tick
+        send "   &8&m---+---&r &e&lTop 10 Levels&r &8&m---+---   "
+        send ""
+        loop {_high.to.low.list::*}:
+            add 1 to {_topnumber}
+            set {_player} to "%loop-value%" parsed as offlineplayer
+            send "    &6%{_topnumber}%&6. &e%{_player}% &8➭ &6Level &e%{lv::%loop-value%}%"
+            if {_topnumber} = 10:
+                stop
+
+command /prestigetop:
+    trigger:
+        loop {pr::*}:
+            add 1 to {_size}
+            if {_low.to.high.list::%loop-value%} is not set:
+                set {_low.to.high.list::%loop-value%} to loop-index
+            else:
+                set {_n} to 0
+                loop {_size} times:
+                    set {_n} to {_n} + 1
+                    if {_low.to.high.list::%loop-value-1%.%{_n}%} is not set:
+                        set {_low.to.high.list::%loop-value-1%.%{_n}%} to loop-index
+                    stop loop
+        wait 1 tick
+        set {_n} to size of {_low.to.high.list::*}
+        loop {_low.to.high.list::*}:
+            set {_high.to.low.list::%{_n}%} to loop-value
+            set {_n} to {_n} - 1
+        wait 1 tick
+        send "   &8&m---+---&r &e&lTop 10 Prestiges&r &8&m---+---   "
+        send ""
+        loop {_high.to.low.list::*}:
+            add 1 to {_topnumber}
+            set {_player} to "%loop-value%" parsed as offlineplayer
+            send "    &6%{_topnumber}%&6. &e%{_player}% &8➭ &6Prestiges: &e%{pr::%loop-value%}%"
+            if {_topnumber} = 10:
+                stop
