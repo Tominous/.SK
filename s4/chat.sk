@@ -1,0 +1,30 @@
+on chat:
+	loop all players:
+		if "%message%" contains "%loop-player%":
+			replace all "%loop-player%" with "&6@&e%loop-player% &r" in message
+			execute console command "execute %loop-player% ~ ~ ~ playsound block.note.pling master @p ~ ~ ~ 1000 1.0"
+
+
+options:
+	a: »	
+on join:
+    if {rank::%player%} is not set:
+        set {rank::%player%} to "&7&lMEMBER"
+
+on chat:
+    cancel event
+    broadcast "&8[&aP%{pr::%player%}%&8] &8[&a%{lv::%player%}%&8] &r%{rank::%player%}% &8» &7%player% &r%{suffix::%player%}% &8» &f%message%"
+
+
+command /rank [<player>] [<text>]:
+    permission: rank.set
+    trigger:
+        if arg-1 is not set:
+            send "&9&lUSAGE: &3/rank (player) (text)"
+        if arg-1 is set:
+            if arg-2 is not set:
+                send "&9&lUSAGE: &3/rank (player) (text)"
+            if arg-2 is set:
+                set {rank::%player%} to "%colored arg-2%"
+                send "&9&lRANK: &3Set %arg-1%'s rank to %colored arg-2%"
+                send "&aYour rank was changed to %colored arg-2%" to arg-1
