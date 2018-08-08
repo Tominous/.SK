@@ -1,0 +1,36 @@
+on right click on yellow shulker box:
+    cancel event
+    if {map::%player%} is not set:
+        add 1 to {coins::%player%}
+        send "&e+1 &6Coin!"
+        stop
+    if {map::%player%} is set:
+        send "&bYou already have access to the map! Go to the map! /map"
+        stop
+
+
+every second:
+    loop all players:
+        execute console command "/title %loop-player% actionbar ["""",{""text"":""Coins: %{coins::%loop-player%}% Level: %{lv::%loop-player%}% EXP: %{xp::%loop-player%}%/30"",""color"":""dark_aqua""}]"
+
+
+
+command /map:
+    trigger:
+        if {map::%player%} is not set:
+            if {coins::%player%} >= 100:
+                remove 100 from {coins::%player%}
+                set {map::%player%} to true
+                send "&9&lMAP: &3You now have access to the map! /map"    
+                stop
+            send "&9&lMAP: &3You need &b100 coins &3to get access to the map."
+        if {map::%player%} is true:
+            send "&9&lMAP: &3Sent you to the map!"
+            teleport the player to {map}
+
+
+command /setmap:
+    permission: map.set
+    trigger:
+        set {map} to the player's location
+        send "&aSet the map to ur location!"
