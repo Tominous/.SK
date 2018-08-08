@@ -1,0 +1,87 @@
+command /shop:
+    trigger:
+        send "&cThis has been removed for glitches! Do /pickaxes or /enchant"
+
+on right click:
+    if player's held item is pickaxe:
+        execute player command "/shop"
+
+command /enchant:
+    trigger:
+        Enchants(player)
+
+function Enchants(p: player):
+    open chest with 3 rows named "&b&lCustom Enchants" to {_p}
+    format slot 11 of {_p} with book named "&e&lEfficiency" to close then run [Eff({_p})]
+    format slot 13 of {_p} with book named "&6&lInvest" to close then run [Invest({_p})]
+    format slot 15 of {_p} with book named "&d&lFortune" to close 
+
+
+function CS(p: player):
+    send "&3&lComing &bsoon!" to {_p}
+
+function Invest(p: player):
+    if lore of {_p}'s tool contains "&6&lINVEST &7(&e1&7)":
+        send "&cEnchants &8// &7You already have the max &6Invest&7." to {_p}
+        stop
+    if {coins::%{_p}%} >= 100:
+        if {_p} is holding a pickaxe:
+            remove 100 from {coins::%{_p}%}
+            set line 1 of lore of {_p}'s tool to "&6&lINVEST &7(&e1&7)"
+            send "&cEnchants &8// &7You now have the &dInvest &7enchantment!" to {_p}
+            stop
+        send "&cEnchants &8// &7You must be holding your pickaxe" to {_p}
+    else:
+        send "&cEnchants &8// &7You need &8100 &7coins to buy invest" to {_p}
+
+function Eff(p: player):
+    if level of efficiency of {_p}'s tool is equal to 3:
+        send "&cEnchants &8// &7You already have the max &6Efficiency&7." to {_p}
+        stop
+    if {coins::%{_p}%} >= 250:
+        if {_p} is holding a diamond pickaxe:
+            send "&cEnchants &8// &7You can't enchant your Efficiency 20 pickaxe to eff 1!" to {_p}
+            stop
+        if {_p} is holding a pickaxe:
+            remove 250 from {coins::%{_p}%}
+            enchant {_p}'s tool with efficiency 3
+            send "&cEnchants &8// &7You now have the &dEfficiency &7enchantment!" to {_p}
+            stop
+        send "&cEnchants &8// &7You must be holding your pickaxe" to {_p}
+    else:
+        send "&cEnchants &8// &7You need &8250 &7coins to buy Efficiency" to {_p}
+
+
+on mine:
+        if lore of player's tool contains "&6&lINVEST &7(&e1&7)":
+                chance of 15%:
+                        send "&cEnchants &8// &7The &6invest &7enchantment found you a crate!"
+                        give player a enchantment_table named "&b&lCrate &8(Right-Click)"
+                chance of 25%:
+                        add 23 to {xp::%player%}
+                        send "&6&lInvest! &eEarned &6&n+23 &exp!" 
+
+
+
+command /coin:
+    permission: coin.add
+    trigger:
+        set {coins::%player%} to 300
+
+
+on right-click:
+    if player's held item is enchantment_table:
+        chance of 25%:
+            add 23 to {xp::%player%}
+            send "&6&lSuccess! &eEarned &6&n+23 &exp!" 
+            remove 1 enchantment_table from player's inventory
+        chance of 75%:
+            send "&c&lMisfortune! &cFound &4nothing :("
+            remove 1 enchantment_table from player's inventory
+    if player's held item is chest:
+        execute console command "execute %player% ~ ~ ~ playsound block.note.pling master @p ~ ~ ~ 1000 1.0"
+        open chest with 3 rows named "&b&lMenu" to player
+        format slot 12 of player with sunflower named "&6&lYour Coins: &e&l%{coins::%player%}%" to close
+        format slot 4 of player with book named "&c&lLevel Top" to close then run [execute player command "/leveltop"]
+        format slot 14 of player with diamond pickaxe named "&b&lShop" to close then run [execute player command "/shop"]
+        format slot 22 of player with diamond sword named "&e&lStats" to close then run [execute player command "/stats"]
