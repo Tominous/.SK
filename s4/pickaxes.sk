@@ -1,0 +1,51 @@
+command /pickaxes:
+    trigger:
+        open chest with 3 rows named "&b&lPickaxes" to player
+        format slot 11 of player with a barrier named "&c&lComing soon" to close
+        format slot 12 of player with a stone pickaxe named "&e&lStone&a [$100]" to close then run [st(player)]
+        format slot 13 of player with a iron pickaxe named "&6&lIron &a[$150]" to close then run [ir(player)]
+        format slot 14 of player with a gold pickaxe named "&6&lGolden &a[$300]" to close then run [go(player)]
+        format slot 15 of player with a diamond pickaxe named "&d&lSpecial &a[$1000]" to close then run [sp(player)]
+
+function st(p: player) :: text:
+    if {coins::%{_p}%} >= 100:
+        remove 100 from {coins::%{_p}%} 
+        execute console command "/minecraft:give %{_p}% stone_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy:[coal_ore,iron_ore]}"
+        send "&9&lPICKAXES: &3Successfully bought the stone pickaxe." to {_p}
+        stop 
+        return "baddo"
+    send "&9&lPICKAXES: &3You need &6100&3 coins to buy the &6stone pickaxe" to {_p}
+    return "goodo"
+
+
+
+function ir(p: player) :: text:
+    if {coins::%{_p}%} >= 150:
+        remove 150 from {coins::%{_p}%} 
+        execute console command "/minecraft:give %{_p}% iron_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy:[coal_ore,iron_ore,diamond_ore]}"
+        send "&9&lPICKAXES: &3Successfully bought the iron pickaxe." to {_p}
+        return "baddo"
+    send "&9&lPICKAXES: &3You need &6150&3 coins to buy the &6iron pickaxe" to {_p}
+    return "goodo"
+
+
+function go(p: player) :: text:
+    if {coins::%{_p}%} >= 300:
+        remove 300 from {coins::%{_p}%} 
+        execute console command "/minecraft:give %{_p}% golden_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy: [coal_ore,iron_ore,diamond_ore,lapis_ore]}"
+        send "&9&lPICKAXES: &3Successfully bought the gold pickaxe." to {_p}
+        stop 
+        return "baddo"
+    send "&9&lPICKAXES: &3You need &6300&3 coins to buy the &6gold pickaxe" to {_p}
+    return "goodo"
+
+
+function sp(p: player) :: text:
+    if {coins::%{_p}%} >= 1000:
+        remove 1000 from {coins::%{_p}%} 
+        execute console command "/minecraft:give %{_p}% diamond_pickaxe 1 0 {Unbreaking:1,HideFlags:15,CanDestroy:[coal_ore,iron_ore,diamond_ore,lapis_ore],ench:[{id:32,lvl:10}]}"
+        send "&9&lPICKAXES: &3Successfully bought the special pickaxe." to {_p}
+        stop 
+        return "baddo"
+    send "&9&lPICKAXES: &3You need &61000&3 coins to buy the &6special pickaxe" to {_p}
+    return "goodo"
