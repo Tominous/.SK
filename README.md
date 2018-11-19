@@ -6,8 +6,9 @@ The server builder is SawyerBx, and Razviti (Razod) is the server skripter.
 
 [Issues](https://github.com/CrazeXMC/skripts/issues)  
 [Pulls](https://github.com/CrazeXMC/skripts/pulls)  
-[Seasons]()  
-[Server Info]()  
+[Seasons](https://github.com/CrazeXMC/skrips/SEASONS.md)  
+[Server Info](https://github.com/CrazeXMC/skripts/SERVER_INFO.md)  
+[TOS](https://github.com/CrazeXMC/skripts/TOS.md)
 
 `No CrazeX User Will Be Given Staff/Advanced Permissions Without Reason/Purchase.`
 
